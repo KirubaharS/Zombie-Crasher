@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class BulletScript : MonoBehaviour
+{
+    [SerializeField]
+    private Rigidbody myBody;
+
+
+    public void Move(float speed)
+    {
+        myBody.AddForce(transform.forward.normalized * speed);
+        Invoke("DeactivateGameObject", 5f);
+    }
+
+    void DeactivateGameObject()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter(Collision target)
+    {
+        if (target.gameObject.tag == "Obstacle")
+        {
+            gameObject.SetActive(false);
+        }
+
+    }
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}
